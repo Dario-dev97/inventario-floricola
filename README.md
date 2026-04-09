@@ -22,3 +22,6 @@ Proyecto desarrollado con React + Node.js para control de inventario floral.
 npm install
 npm start
 
+backend = node app.js
+frontend = npm start
+
