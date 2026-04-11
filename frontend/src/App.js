@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import './App.css';
 import logo from './logo.png';
+
 
 
 
@@ -14,8 +16,13 @@ const [password, setPassword] = useState('');
 const [logueado, setLogueado] = useState(false);
 
 const productosBajos = productos.filter(item => item.cantidad < 50).length;
-const productoCaro = Math.max(...productos.map(item => Number(item.precio)));
-const mayorStock = Math.max(...productos.map(item => Number(item.cantidad)));
+const productoCaro = productos.length > 0
+  ? Math.max(...productos.map(item => Number(item.precio)))
+  : 0;
+
+const mayorStock = productos.length > 0
+  ? Math.max(...productos.map(item => Number(item.cantidad)))
+  : 0;
 
 
 const totalStock = productos.reduce((acc, item) => acc + item.cantidad, 0);
@@ -43,31 +50,28 @@ const iniciarSesion = () => {
 
 if (!logueado) {
   return (
-    <div style={{ textAlign: 'center', marginTop: '100px' }}>
-      <h2>Login Inventario</h2>
+    <div className="login-container">
+      <div className="login-box">
+        <img src={logo} alt="Logo" className="logo" />
+        <h2>Sistema Inventario Florícola</h2>
 
-      <input
-        placeholder="Usuario"
-        value={usuario}
-        onChange={(e) => setUsuario(e.target.value)}
-        style={{ margin: '10px', padding: '8px' }}
-      />
+        <input
+          placeholder="Usuario"
+          value={usuario}
+          onChange={(e) => setUsuario(e.target.value)}
+        />
 
-      <br />
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        style={{ margin: '10px', padding: '8px' }}
-      />
-
-      <br />
-
-      <button onClick={iniciarSesion}>
-        Entrar
-      </button>
+        <button onClick={iniciarSesion}>
+          Entrar
+        </button>
+      </div>
     </div>
   );
 }
@@ -93,161 +97,155 @@ if (!logueado) {
   <h2 style={{ margin: '10px 0 0 0', color: '#1b3a57' }}>
     Sistema Inventario Florícola
   </h2>
-
+<p style={{ color: '#555', marginTop: '10px' }}>
+  📅 {new Date().toLocaleDateString()}
+</p>
 </div>
 
 
       <h1 style={{ color: 'green' }}>🌷 Inventario Florícola</h1>
-<div style={{
-  display: 'flex',
-  gap: '20px',
-  marginBottom: '30px',
-  flexWrap: 'wrap'
-}}>
+<div 
+  className="dashboard" 
+>
 
-  <div style={{
-    backgroundColor: '#d4edda',
-    padding: '15px',
-    borderRadius: '10px',
-    minWidth: '180px'
+   <div className="card" style={{
+    backgroundColor: '#d4edda'
   }}>
+    
     <h3>Total productos</h3>
     <p>{productos.length}</p>
   </div>
 
-  <div style={{
-    backgroundColor: '#d1ecf1',
-    padding: '15px',
-    borderRadius: '10px',
-    minWidth: '180px'
+  <div  className="card" style={{
+    backgroundColor: '#d4edda'
   }}>
     <h3>Stock total</h3>
     <p>{totalStock}</p>
   </div>
 
-  <div style={{
-    backgroundColor: '#fff3cd',
-    padding: '15px',
-    borderRadius: '10px',
-    minWidth: '180px'
-  }}>
+  <div className="card" style={{ backgroundColor: '#d4edda' }}>
     <h3>Valor inventario</h3>
     <p>{valorTotal.toFixed(2)}</p>
   </div>
-<div style={{
-  backgroundColor: '#f8d7da',
-  padding: '15px',
-  borderRadius: '10px',
-  minWidth: '180px'
-}}>
+<div  className="card" style={{ backgroundColor: '#d4edda' }}>
   <h3>Productos críticos</h3>
   <p>{productosBajos}</p>
 </div>
-<div style={{
-  backgroundColor: '#d1ecf1',
-  padding: '15px',
-  borderRadius: '10px',
-  minWidth: '180px'
-}}>
+<div className="card" style={{ backgroundColor: '#d4edda' }}>
   <h3>Precio más alto</h3>
   <p>{productoCaro}</p>
 </div>
-<div style={{
-  backgroundColor: '#fff3cd',
-  padding: '15px',
-  borderRadius: '10px',
-  minWidth: '180px'
-}}>
+<div  className="card" style={{ backgroundColor: '#d4edda' }}>
   <h3>Mayor stock</h3>
   <p>{mayorStock}</p>
 </div>
 </div>
-<div style={{
-  backgroundColor: '#FFC100',
-  padding: '15px',
-  borderRadius: '10px',
-  minWidth: '180px'
-}}>
-  <h3>Fecha actual</h3>
-  <p>{new Date().toLocaleDateString()}</p>
-</div>
+
 <table>
   
 </table>
-      <div style={{ marginBottom: '20px' }}>
+      <div style={{
+  marginBottom: '20px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center'
+}}>
         <input
           value={nombre}
           placeholder="Nombre flor"
           onChange={(e) => setNombre(e.target.value)}
-          style={{ margin: '5px', padding: '8px' }}
+          style={{  margin: '5px',
+  padding: '10px',
+  width: '300px',
+  borderRadius: '8px',
+  border: '1px solid #ccc' }}
+          className="input-form"
         />
 
         <input
           value={cantidad}
           placeholder="Cantidad"
           onChange={(e) => setCantidad(e.target.value)}
-          style={{ margin: '5px', padding: '8px' }}
+          style={{ margin: '5px',
+  padding: '10px',
+  width: '300px',
+  borderRadius: '8px',
+  border: '1px solid #ccc' }}
+          className="input-form"
         />
 
         <input
           value={precio}
           placeholder="Precio"
           onChange={(e) => setPrecio(e.target.value)}
-          style={{ margin: '5px', padding: '8px' }}
+          style={{  margin: '5px',
+  padding: '10px',
+  width: '300px',
+  borderRadius: '8px',
+  border: '1px solid #ccc' }}
+          className="input-form"
         />
         
 
         <button
-          style={{
-            margin: '5px',
-  padding: '10px 20px',
+  className="btn-guardar"
+  style={{
+  margin: '10px',
+  padding: '10px',
+  width: '320px',
   backgroundColor: 'green',
   color: 'white',
   border: 'none',
-  borderRadius: '5px',
+  borderRadius: '8px',
   cursor: 'pointer'
-
-            
-          }}
-          onClick={() => {
-            fetch('http://localhost:3000/productos', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                nombre_flor: nombre,
-                cantidad,
-                precio
-              })
-            })
-            .then(() => fetch('http://localhost:3000/productos'))
-            .then(res => res.json())
-            .then(data => {
-              setProductos(data);
-              setNombre('');
-              setCantidad('');
-              setPrecio('');
-            })
-          }}
-        >
-          Guardar
-        </button>
+}}
+  onClick={() => {
+    fetch('http://localhost:3000/productos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        nombre_flor: nombre,
+        cantidad,
+        precio
+      })
+    })
+    .then(() => fetch('http://localhost:3000/productos'))
+    .then(res => res.json())
+    .then(data => {
+      setProductos(data);
+      setNombre('');
+      setCantidad('');
+      setPrecio('');
+    })
+  }}
+>
+  Guardar
+</button>
+        
         <input
   value={busqueda}
   placeholder="Buscar flor"
   onChange={(e) => setBusqueda(e.target.value)}
-  style={{ margin: '10px', padding: '8px' }}
+  style={{  margin: '5px',
+  padding: '10px',
+  width: '300px',
+  borderRadius: '8px',
+   }}
+  className="input-form"
 />
 <button
+  className="btn-ordenar"
   style={{
-    margin: '10px',
-    padding: '8px',
-    backgroundColor: '#444',
-    color: 'white',
-    border: 'none',
-    borderRadius: '5px'
-  }}
+  margin: '10px',
+  padding: '10px',
+  width: '320px',
+  backgroundColor: '#444',
+  color: 'white',
+  border: 'none',
+  borderRadius: '8px'
+}}
   onClick={() => {
     const ordenados = [...productos].sort((a, b) => a.precio - b.precio);
     setProductos(ordenados);
