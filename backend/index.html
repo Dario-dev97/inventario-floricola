@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inventario Florícola</title>
+</head>
+<body>
+
+  <h1>Agregar Producto 🌸</h1>
+
+  <form id="formulario">
+    <input type="text" id="nombre" placeholder="Nombre de flor" required><br><br>
+    <input type="number" id="cantidad" placeholder="Cantidad" required><br><br>
+    <input type="number" id="precio" placeholder="Precio" required><br><br>
+    
+    <button type="submit">Guardar</button>
+  </form>
+
+  <h2>Productos:</h2>
+  <ul id="lista"></ul>
+
+<script>
+const API = "https://inventario-floricola.onrender.com/productos";
+
+// ENVIAR DATOS
+document.getElementById("formulario").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const nombre_flor = document.getElementById("nombre").value;
+  const cantidad = document.getElementById("cantidad").value;
+  const precio = document.getElementById("precio").value;
+
+  await fetch(API, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ nombre_flor, cantidad, precio })
+  });
+
+  cargarProductos();
+});
+
+// MOSTRAR PRODUCTOS
+async function cargarProductos() {
+  const res = await fetch(API);
+  const data = await res.json();
+
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
+  data.forEach(p => {
+    const li = document.createElement("li");
+    li.textContent = `${p.nombre_flor} - ${p.cantidad} - $${p.precio}`;
+    lista.appendChild(li);
+  });
+}
+
+cargarProductos();
+</script>
+
+</body>
+</html>
