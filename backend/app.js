@@ -14,6 +14,16 @@ const pool = new Pool({
     rejectUnauthorized: false,
   },
 });
+pool.query(`
+  CREATE TABLE IF NOT EXISTS productos (
+    id SERIAL PRIMARY KEY,
+    nombre_flor VARCHAR(100),
+    cantidad INT,
+    precio NUMERIC
+  );
+`)
+.then(() => console.log("Tabla productos lista"))
+.catch(err => console.error("Error creando tabla:", err));
 
 app.get('/productos', async (req, res) => {
   const resultado = await pool.query('SELECT * FROM public.productos');
