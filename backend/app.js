@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -101,3 +102,4 @@ app.put('/productos/:id', async (req, res) => {
 
   res.json({ mensaje: 'Producto actualizado' });
 });
+
