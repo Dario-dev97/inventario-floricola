@@ -14,6 +14,8 @@ function App() {
   const [usuario, setUsuario] = useState('');
 const [password, setPassword] = useState('');
 const [logueado, setLogueado] = useState(false);
+const API = "https://inventario-floricola.onrender.com/productos";
+
 
 const productosBajos = productos.filter(item => item.cantidad < 50).length;
 const productoCaro = productos.length > 0
@@ -43,7 +45,7 @@ const iniciarSesion = () => {
 
 
   useEffect(() => {
-    fetch('http://localhost:3000/productos')
+    fetch('https://inventario-floricola.onrender.com/productos')
       .then(res => res.json())
       .then(data => setProductos(data));
   }, []);
@@ -200,7 +202,7 @@ if (!logueado) {
   cursor: 'pointer'
 }}
   onClick={() => {
-    fetch('http://localhost:3000/productos', {
+    fetch('https://inventario-floricola.onrender.com/productos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -211,7 +213,7 @@ if (!logueado) {
         precio
       })
     })
-    .then(() => fetch('http://localhost:3000/productos'))
+    .then(() => fetch('https://inventario-floricola.onrender.com/productos'))
     .then(res => res.json())
     .then(data => {
       setProductos(data);
@@ -294,10 +296,10 @@ if (!logueado) {
   }}
   onClick={() => {
     if (window.confirm('¿Seguro que deseas eliminar esta flor?')) {
-      fetch(`http://localhost:3000/productos/${producto.id}`, {
+      fetch(`https://inventario-floricola.onrender.com/productos/${producto.id}`, {
         method: 'DELETE'
       })
-      .then(() => fetch('http://localhost:3000/productos'))
+      .then(() => fetch('https://inventario-floricola.onrender.com/productos'))
       .then(res => res.json())
       .then(data => setProductos(data))
     }
@@ -324,7 +326,7 @@ if (!logueado) {
     const nuevaCantidad = prompt('Nueva cantidad', producto.cantidad);
     const nuevoPrecio = prompt('Nuevo precio', producto.precio);
 
-    fetch(`http://localhost:3000/productos/${producto.id}`, {
+    fetch(`https://inventario-floricola.onrender.com/productos/${producto.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -335,7 +337,7 @@ if (!logueado) {
         precio: nuevoPrecio
       })
     })
-    .then(() => fetch('http://localhost:3000/productos'))
+    .then(() => fetch('https://inventario-floricola.onrender.com/productos'))
     .then(res => res.json())
     .then(data => setProductos(data))
   }}>

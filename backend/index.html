@@ -3,7 +3,30 @@
 <head>
   <title>Inventario Florícola</title>
 </head>
+<script>
+async function cargarProductos() {
+  const res = await fetch("https://inventario-floricola.onrender.com/productos");
+  const data = await res.json();
+
+  console.log(data); // 👈 para ver en consola
+
+  const contenedor = document.getElementById("lista-productos");
+  contenedor.innerHTML = "";
+
+  data.forEach(p => {
+    contenedor.innerHTML += `
+  <div class="card">
+    <h3>${p.nombre_flor}</h3>
+    <p>${p.cantidad}</p>
+  </div>
+`;
+  });
+}
+
+cargarProductos();
+</script>
 <body>
+  
 
   <h1>Agregar Producto 🌸</h1>
 
@@ -57,6 +80,6 @@ async function cargarProductos() {
 
 cargarProductos();
 </script>
-
+<div id="lista-productos"></div>
 </body>
 </html>
