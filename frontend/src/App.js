@@ -284,7 +284,11 @@ if (!logueado) {
   {producto.cantidad}
 </td>
   <td>{producto.precio}</td>
- <td>{new Date(producto.fecha).toLocaleDateString()}</td>
+ <td><td>
+  {producto.fecha 
+    ? new Date(producto.fecha).toLocaleDateString() 
+    : "Sin fecha"}
+</td></td>
   <td>
     <button
   style={{

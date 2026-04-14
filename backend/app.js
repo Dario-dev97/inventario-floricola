@@ -28,16 +28,23 @@ const pool = new Pool({
 });
 
 // Crear tabla si no existe
-pool.query(`
+pool.query(
+  `
   CREATE TABLE IF NOT EXISTS productos (
-    id SERIAL PRIMARY KEY,
-    nombre_flor VARCHAR(100),
-    cantidad INT,
-    precio NUMERIC
+  id SERIAL PRIMARY KEY,
+  nombre_flor VARCHAR(100),
+  cantidad INT,
+  precio NUMERIC,
+  fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
 `)
 .then(() => console.log("Tabla productos lista"))
 .catch(err => console.error("Error creando tabla:", err));
+
+pool.query(`
+  ALTER TABLE productos
+  ADD COLUMN IF NOT EXISTS fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+`);
 
 // GET productos
 app.get('/productos', async (req, res) => {
@@ -50,9 +57,10 @@ app.post('/productos', async (req, res) => {
   const { nombre_flor, cantidad, precio } = req.body;
 
   const resultado = await pool.query(
-    'INSERT INTO productos (nombre_flor, cantidad, precio) VALUES ($1, $2, $3) RETURNING *',
-    [nombre_flor, cantidad, precio]
-  );
+  'INSERT INTO productos (nombre_flor, cantidad, precio, fecha) VALUES ($1, $2, $3, NOW()) RETURNING *',
+  [nombre_flor, cantidad, precio]
+);
+
 
   res.json(resultado.rows[0]);
 });
