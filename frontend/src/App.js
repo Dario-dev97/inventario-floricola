@@ -81,6 +81,9 @@ const registrarUsuario = () => {
   .then(res => res.json())
   .then(data => {
     alert("Usuario creado correctamente");
+    // 👇 LIMPIAR CAMPOS
+  setUsuario('');
+  setPassword('');
   })
   .catch(() => {
     alert("Error al registrar");
