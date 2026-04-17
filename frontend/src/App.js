@@ -34,7 +34,7 @@ const iniciarSesion = () => {
 
   const iniciarSesion = () => {
 
-  // 🔴 VALIDACIÓN FUERTE
+  // VALIDACIÓN FUERTE
   if (usuario.trim() === '' || password.trim() === '') {
     alert("Ingresa usuario y contraseña");
     return;
