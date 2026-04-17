@@ -60,6 +60,32 @@ const totalStock = productos.reduce((acc, item) => acc + item.cantidad, 0);
     alert('Error conectando con el servidor');
   });
 };
+const registrarUsuario = () => {
+
+  if (usuario.trim() === '' || password.trim() === '') {
+    alert("Completa los datos");
+    return;
+  }
+
+  fetch('https://inventario-floricola.onrender.com/registro', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      username: usuario,
+      password: password,
+      rol: 'empleado'
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("Usuario creado correctamente");
+  })
+  .catch(() => {
+    alert("Error al registrar");
+  });
+};
 
   const valorTotal = productos.reduce(
   (total, producto) => total + Number(producto.cantidad) * Number(producto.precio),
@@ -96,7 +122,7 @@ if (!logueado) {
         <button onClick={iniciarSesion}>
           Entrar
         </button>
-        
+
         <button onClick={registrarUsuario}>
   Crear cuenta
 </button>
