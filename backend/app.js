@@ -37,9 +37,21 @@ pool.query(
   precio NUMERIC,
   fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
+  
 `)
 .then(() => console.log("Tabla productos lista"))
 .catch(err => console.error("Error creando tabla:", err));
+
+pool.query(`
+  CREATE TABLE IF NOT EXISTS usuarios (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE,
+    password VARCHAR(100),
+    rol VARCHAR(20) DEFAULT 'empleado'
+  );
+`)
+.then(() => console.log("Tabla usuarios lista"))
+.catch(err => console.error("Error creando usuarios:", err));
 
 pool.query(`
   ALTER TABLE productos
