@@ -136,7 +136,15 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Error en login' });
   }
 });
-
+// VER USUARIOS
+app.get('/usuarios', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM usuarios');
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).json({ error: 'Error obteniendo usuarios' });
+  }
+});
 // Servidor
 app.listen(PORT, () => {
   console.log("Servidor funcionando en puerto " + PORT);
