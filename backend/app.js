@@ -117,6 +117,25 @@ app.post('/registro', async (req, res) => {
     res.status(400).json({ error: 'Usuario ya existe' });
   }
 });
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const result = await pool.query(
+      'SELECT * FROM usuarios WHERE username = $1 AND password = $2',
+      [username, password]
+    );
+
+    if (result.rows.length > 0) {
+      res.json({ usuario: result.rows[0] });
+    } else {
+      res.json({ usuario: null });
+    }
+
+  } catch (error) {
+    res.status(500).json({ error: 'Error en login' });
+  }
+});
 
 // Servidor
 app.listen(PORT, () => {
