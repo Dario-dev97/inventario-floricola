@@ -96,9 +96,14 @@ if (!logueado) {
         <button onClick={iniciarSesion}>
           Entrar
         </button>
+        
+        <button onClick={registrarUsuario}>
+  Crear cuenta
+</button>
       </div>
     </div>
   );
+  
 }
 
 
