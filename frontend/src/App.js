@@ -31,6 +31,15 @@ const totalStock = productos.reduce((acc, item) => acc + item.cantidad, 0);
 
 
 const iniciarSesion = () => {
+
+  const iniciarSesion = () => {
+
+  // 🔴 VALIDACIÓN FUERTE
+  if (usuario.trim() === '' || password.trim() === '') {
+    alert("Ingresa usuario y contraseña");
+    return;
+  }
+
   fetch('https://inventario-floricola.onrender.com/login', {
     method: 'POST',
     headers: {
@@ -45,7 +54,6 @@ const iniciarSesion = () => {
   .then(data => {
     if (data.usuario) {
       setLogueado(true);
-      console.log("Login correcto", data.usuario);
     } else {
       alert('Credenciales incorrectas');
     }
