@@ -118,8 +118,12 @@ if (!logueado) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-<div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}></div>
-
+        <div style={{ 
+  display: 'flex', 
+  flexDirection: 'column', 
+  gap: '15px',
+  marginTop: '10px'
+}}></div>
         <button onClick={iniciarSesion}>
       
           Entrar
