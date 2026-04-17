@@ -136,6 +136,16 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Error en login' });
   }
 });
+app.delete('/usuarios/:id', async (req, res) => {
+  const { id } = req.params;
+
+  await pool.query(
+    'DELETE FROM usuarios WHERE id = $1',
+    [id]
+  );
+
+  res.json({ mensaje: 'Usuario eliminado' });
+});
 // VER USUARIOS
 app.get('/usuarios', async (req, res) => {
   try {
