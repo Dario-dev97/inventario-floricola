@@ -13,15 +13,12 @@ body {
   background: linear-gradient(135deg, #f7d9e3, #f3f7d9);
 }
 
-.login-box {
-  background: white;
-  transition: all 0.3s ease;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  text-align: center;
-  width: 350px;
-  overflow: hidden;
+.login-box button:nth-child(1) {
+  background-color: #28a745; /* verde login */
+}
+
+.login-box button:nth-child(2) {
+  background-color: #007bff; /* azul registro */
 }
 .logo {
   width: 120px;

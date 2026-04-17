@@ -118,28 +118,29 @@ if (!logueado) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+
+        {/* 👇 ESTE ES EL CAMBIO IMPORTANTE */}
         <div style={{ 
-  display: 'flex', 
-  flexDirection: 'column', 
-  gap: '15px',
-  marginTop: '10px'
-}}></div>
-        <button onClick={iniciarSesion}>
-      
-          Entrar
-        </button>
+          display: 'flex', 
+          flexDirection: 'column', 
+          gap: '15px',
+          marginTop: '10px'
+        }}>
 
-        <button onClick={registrarUsuario}>  
+          <button onClick={iniciarSesion}>
+            Entrar
+          </button>
 
-  Crear cuenta
-</button>
+          <button onClick={registrarUsuario}>
+            Crear cuenta
+          </button>
+
+        </div>
+
       </div>
-    
     </div>
   );
-  
 }
-
 
   return ( 
     
