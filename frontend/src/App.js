@@ -30,8 +30,6 @@ const mayorStock = productos.length > 0
 const totalStock = productos.reduce((acc, item) => acc + item.cantidad, 0);
 
 
-const iniciarSesion = () => {
-
   const iniciarSesion = () => {
 
   // VALIDACIÓN FUERTE
@@ -309,11 +307,11 @@ if (!logueado) {
   {producto.cantidad}
 </td>
   <td>{producto.precio}</td>
- <td><td>
+ <td>
   {producto.fecha 
     ? new Date(producto.fecha).toLocaleDateString() 
     : "Sin fecha"}
-</td></td>
+</td>
   <td>
     <button
   style={{
@@ -392,7 +390,5 @@ if (!logueado) {
 </div>
 );
 }
-}
-
 
 export default App;
