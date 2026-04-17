@@ -392,5 +392,7 @@ if (!logueado) {
 </div>
 );
 }
+}
+
 
 export default App;
