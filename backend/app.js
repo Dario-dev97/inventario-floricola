@@ -102,6 +102,22 @@ app.put('/productos/:id', async (req, res) => {
   res.json({ mensaje: 'Producto actualizado' });
 });
 
+// REGISTRO DE USUARIO
+app.post('/registro', async (req, res) => {
+  const { username, password, rol } = req.body;
+
+  try {
+    const result = await pool.query(
+      'INSERT INTO usuarios (username, password, rol) VALUES ($1, $2, $3) RETURNING *',
+      [username, password, rol || 'empleado']
+    );
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    res.status(400).json({ error: 'Usuario ya existe' });
+  }
+});
+
 // Servidor
 app.listen(PORT, () => {
   console.log("Servidor funcionando en puerto " + PORT);
